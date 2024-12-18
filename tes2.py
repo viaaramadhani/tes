@@ -1,7 +1,6 @@
 # Studi Kasus Pemilihan Tugas Siswa dengan Brute Force, Greedy, dan Selection Sort
-
+from itertools import combinations
 def brute_force_task_selection(tasks, limit_waktu):
-    from itertools import combinations
 
     kombinasi_terbaik = []
     max_prioritas = 0
@@ -16,19 +15,6 @@ def brute_force_task_selection(tasks, limit_waktu):
                 kombinasi_terbaik = combination
 
     return kombinasi_terbaik
-
-def greedy_task_selection(tasks, limit_waktu):
-
-    tasks.sort(key=lambda x: x['prioritas'] / x['waktu'], reverse=True)
-    task_terpilih = []
-    remaining_time = limit_waktu
-
-    for task in tasks:
-        if task['waktu'] <= remaining_time:
-            task_terpilih.append(task)
-            remaining_time -= task['waktu']
-
-    return task_terpilih
 
 def selection_sort_tasks(tasks):
 
@@ -54,11 +40,6 @@ limit_waktu = 6
 # Brute Force Algorithm
 print("\n--- Brute Force Algorithm ---")
 result = brute_force_task_selection(tasks, limit_waktu)
-print("Selected Tasks:", [task['name'] for task in result])
-
-# Greedy Algorithm
-print("\n--- Greedy Algorithm ---")
-result = greedy_task_selection(tasks, limit_waktu)
 print("Selected Tasks:", [task['name'] for task in result])
 
 # Selection Sort

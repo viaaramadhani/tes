@@ -3,7 +3,8 @@ from itertools import combinations
 import time
 
 def brute_force(tasks, limit):
-    return max((c for r in range(1, len(tasks)+1) for c in combinations(tasks, r) if sum(t['waktu'] for t in c) <= limit),
+    return max((c for r in range(1, len(tasks)+1) for c in combinations(tasks, r) 
+                if sum(t['waktu'] for t in c) <= limit),
                 key=lambda x: sum(t['prioritas'] for t in x), default=[])
 
 def greedy(tasks, limit):
@@ -34,11 +35,9 @@ tasks = [
 limit_waktu = 6
 
 # Brute Force
-start_brute_force = time.perf_counter()
-brute_result = brute_force(tasks, limit_waktu)
-end_time_brute_force = time.perf_counter()
+brute_result, brute_force_time = measure_time(brute_force, tasks, limit_waktu)
 print("\n--- Brute Force ---")
-print("Tasks:", [t['name'] for t in brute_result], f"| Time: {end_time_brute_force - start_brute_force:.6f} sec")
+print("Tasks:", [t['name'] for t in brute_result], f"| Time: {brute_force_time  :.6f} sec")
 
 # Greedy
 greedy_result, greedy_time = measure_time(greedy, tasks, limit_waktu)
